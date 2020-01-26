@@ -1,11 +1,11 @@
 ﻿{% extends "app/layout.html" %}
 
 {% block content %}
-
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
 
-     
+     <!-- Add row and Delete row buton -->
       var i=1;
      $("#add_row").click(function(){
       $('#addr'+i).html("<td>"+ (i+1) +"</td><td><input name='item_id' type='item_id' placeholder='Item ID' class='form-control input-md'   /> </td><td><input  name='item_name' type='text' placeholder='Item Name'  class='form-control input-md'></td><td><input  name='description' type='text' placeholder='Description'  class='form-control input-md' ></td><td><input name='quantity' type='text' placeholder='Quantity' class='form-control input-md'  /> </td><td><input name='unit_price' type='text' placeholder='Price Per Unit' class='form-control input-md'  /> </td>");
@@ -55,11 +55,11 @@
 				<tbody name="item_rows">
 					<tr id='addr0'>
 						<td>1</td>
-                        <td> <input type="text" name='item_id' placeholder='Item id'  class="form-control" /> </td>
-						<td><input type="text" name="item_name"  placeholder='Item name' class="form-control" ></td>
-						<td><input type="text" name='description' placeholder='Description' class="form-control" /></td>
-                        <td><input type="text" name='quantity' placeholder='Quantity'  class="form-control" /></td>
-                        <td><input type="text" name='unit_price' placeholder='Price Per Unit'  class="form-control"  /></td>
+                       <td> <input type="text"  id="txt1" onkeyup="manage(this)" name='item_id' placeholder='Item id'  class="form-control" /> </td>
+						<td><input type="text" id="txt2" onkeyup="manage(this)" name="item_name"  placeholder='Item name' class="form-control" ></td>
+						<td><input type="text" id="txt3" onkeyup="manage(this)" name='description' placeholder='Description' class="form-control" /></td>
+                        <td><input type="text" id="txt4" onkeyup="manage(this)" name='quantity' placeholder='Quantity'  class="form-control" /></td>
+                        <td><input type="text" id="txt5" onkeyup="manage(this)" name='unit_price' placeholder='Price Per Unit'  class="form-control"  /></td>
 					</tr> 
                     <tr id='addr1'></tr>
                
@@ -70,6 +70,29 @@
 	    <a id="add_row" class="btn btn-default pull-left">Add Item</a><a id='delete_row' class="pull-right btn btn-default">Delete Item</a>
        
         <div class="margintop">
+		
+		
+	    <!-- make sure if any column is empty then cannot press the submit button-->
+            <script>
+
+            $(document).ready(function () {
+                $('button[type="submit"]').attr('disabled', true);
+                $('input[type="text"]').on('keyup', function () {
+                    var text_value1 = $('input[name="item_id"]').val();
+                    var text_value2 = $('input[name="item_name"]').val();
+                    var text_value3 = $('input[name="description"]').val();
+                    var text_value4 = $('input[name="quantity"]').val();
+                    var text_value5 = $('input[name="unit_price"]').val();
+                    
+                    if (text_value1 != '' && text_value2 != '' && text_value3 != '' && text_value4 != '' && text_value5 != '') {
+                        $('button[type="submit"]').attr('disabled', false);
+                    } else {
+                        $('button[type="submit"]').attr('disabled', true);
+                    }
+                });
+            });
+
+            </script>
             <button type="submit" class="btn btn-success btn-square buttonsize">Submit</button>
             <a class="btn btn-danger btn-square buttonsize" href="/menu">Cancel</a>
         </div>
