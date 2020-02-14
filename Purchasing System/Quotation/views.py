@@ -69,7 +69,7 @@ def quotationconfirmation(request):
     request_for_quotation_id = request.POST['request_for_quotation_id']
     user_id  = request.user.id
     staff = Person.objects.get(user_id = user_id)
-
+    
     vendor_id = request.POST['vendor_id']
     description = request.POST['description']
     vendor_info = Vendor.objects.get(vendor_id = vendor_id)
@@ -103,6 +103,7 @@ def quotationconfirmation(request):
         }
         items.append(item_table)
         i = i + 1
+        grand_total = grand_total + total
     print(items)
        
 
@@ -112,6 +113,7 @@ def quotationconfirmation(request):
             'quotation_id' : quo_id,
             'staff_id' : staff.person_id,
             'vendor_id' : vendor_id,
+            
             'grand_total': grand_total,
             'rows' : items,
             'staff_info' : staff,
@@ -164,6 +166,7 @@ def quotationdetails(request):
         }
         items.append(item_table)
         i = i + 1
+        grand_total = grand_total + total
     print(items)
 
  
