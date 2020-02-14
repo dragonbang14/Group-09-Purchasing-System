@@ -242,6 +242,7 @@ def purchaseorderdetails(request):
     subject = 'PURCHASE ORDER INFORMATION: '+ po_id
     message = 'This is the Purchase Order Information: \n'+'Person In Charge: '+staff.person_name+'\n'+'Ship to:'+staff.person_address+ '\n' +'Purchase Order Number: ' + po_id + '\n'+'Quotation ID: ' + quotation.quotation_id + '\n'+'Time Issued: ' + str(current_time) + '\n'+'Vendor ID: ' + vendor_id + '\n'+'Description: ' + description + '\n'+'Shipping Instructions: ' + shipping_inst + '\n'+ str(x) +'\n'
 
+    #indent 14Feb2020
     try:
         email_from = settings.EMAIL_HOST_USER
         recipient_list = [vendor_info.vendor_email,]
